@@ -1,8 +1,8 @@
-Use 10:00:00:00:00:00 as mac for devices that don't have a mac address.
-
+diff --git a/networking/udhcp/d6_socket.c b/networking/udhcp/d6_socket.c
+index acf108367..0110e6065 100644
 --- a/networking/udhcp/d6_socket.c
 +++ b/networking/udhcp/d6_socket.c
-@@ -59,7 +59,7 @@ int FAST_FUNC d6_read_interface(const char *interface, int *ifindex, struct in6_
+@@ -74,7 +74,7 @@ int FAST_FUNC d6_read_interface(
  	freeifaddrs(ifap);
  
  	if (retval & (1<<0)) {
@@ -11,7 +11,7 @@ Use 10:00:00:00:00:00 as mac for devices that don't have a mac address.
  		struct ifreq ifr;
  		int fd;
  
-@@ -71,9 +71,12 @@ int FAST_FUNC d6_read_interface(const char *interface, int *ifindex, struct in6_
+@@ -86,9 +86,12 @@ int FAST_FUNC d6_read_interface(
  			log2("ifindex %d", *ifindex);
  			if (((uint32_t*)mac)[0] == 0) {
  				/* invent a fictitious MAC (once) */
