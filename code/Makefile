@@ -16,8 +16,7 @@
 CFLAGS ?= -march=native -mtune=native -O2 -fomit-frame-pointer -pipe
 LDFLAGS ?= -Wl,-O2 -Wl,--as-needed -Wl,--sort-common -Wl,--hash-style=gnu
 
-CFLAGS += -Wall -Werror
-CFLAGS += -std=gnu11
+CFLAGS += -Wall -Werror -std=gnu11 -fcommon
 
 # Libraries
 CFLAGS += $(shell pkg-config --cflags libmnl)
