@@ -1,0 +1,47 @@
+#!/bin/sh
+
+set -e
+
+# List of all events:
+#		startup: OpenHybrid started.
+#		shutdown: OpenHybrid stopped.
+#		tunneldown: Tunnel device destroyed.
+#		tunnelup: Tunnel device created.
+#		dhcpup_ip: IPv4 address obtained.
+#		dhcpup_ip6: IPv6 prefix obtained.
+#		dhcpdown_ip: iPv4 address lease expired.
+#		dhcpdown_ip6: iPv6 prefix lease expired.
+
+# List of all environment variables:
+#		lte_interface_name: LTE interface name.
+#		dsl_interface_name: DSL interface name (Bonding mode only).
+#		tunnel_interface_name: Tunnel interface name (Bonding mode only).
+#		tunnel_interface_mtu: Tunnel interfaces mtu.
+#		dhcp_ip: Public iPv4 address.
+#		dhcp_lease_time: Public iPv4 address lease time in seconds.
+#		dhcp6_prefix_address: Public IPv6 prefix address.
+#		dhcp6_prefix_length: Public IPv6 prefix length.
+#		dhcp6_lease_time: Public iPv6 prefix address and length lease time in seconds.
+
+
+main(){
+	event="${1}"
+
+	case "${event}" in
+		dhcpup_ip)
+			ip -4 address replace "${dhcp_ip}/32" dev "${tunnel_interface_name}"
+			;;
+		dhcpup_ip6)
+			# assign the first ip of the prefix to the device (TODO: use real math to calculcate the first usable ip)
+			ip -6 address replace "${dhcp6_prefix_address}1/128" dev "${tunnel_interface_name}"
+			;;
+		dhcpdown_ip)
+			ip -4 address flush dev "${tunnel_interface_name}"
+			;;
+		dhcpdown_ip6)
+			ip -6 address flush dev "${tunnel_interface_name}"
+			;;
+	esac
+}
+
+main "${@}"
