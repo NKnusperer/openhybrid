@@ -1,4 +1,4 @@
-# OpenHybrid - an open GRE tunnel bonding implemantion
+# OpenHybrid - an open GRE tunnel bonding implementation
 # Copyright (C) 2019  Friedrich Oslage <friedrich@oslage.de>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -13,12 +13,12 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 CFLAGS ?= -march=native -mtune=native -O2 -fomit-frame-pointer -pipe
 LDFLAGS ?= -Wl,-O2 -Wl,--as-needed -Wl,--sort-common -Wl,--hash-style=gnu
 
 CFLAGS += -Wall -Werror -std=gnu11 -fcommon
 
-# Libraries
 CFLAGS += $(shell pkg-config --cflags libmnl)
 LDFLAGS += $(shell pkg-config --libs-only-other --libs-only-L libmnl)
 LIBS += $(shell pkg-config --libs-only-l libmnl) -lpthread
@@ -34,5 +34,6 @@ $(EXEC): $(OBJECTS) Makefile
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $(EXEC) $(LIBS)
 
 .PHONY: clean
+
 clean:
 	rm -f *.o $(EXEC)
