@@ -23,17 +23,24 @@ CFLAGS += $(shell pkg-config --cflags libmnl)
 LDFLAGS += $(shell pkg-config --libs-only-other --libs-only-L libmnl)
 LIBS += $(shell pkg-config --libs-only-l libmnl) -lpthread
 
-EXEC = openhybrid
-SOURCES = $(wildcard *.c)
-OBJECTS = $(SOURCES:.c=.o)
+CODE_DIRECTORY = code
+BUILD_DIRECTORY = build
+CODE = $(wildcard $(CODE_DIRECTORY)/*.c)
+HEADER = $(wildcard $(CODE_DIRECTORY)/*.h)
+OBJECT = $(patsubst $(CODE_DIRECTORY)/%.c,$(BUILD_DIRECTORY)/%.o,$(CODE))
+EXECUTABLE = $(BUILD_DIRECTORY)/openhybrid
 
-%.o: %.c *.h Makefile
+.PHONY: clean build
+
+build: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECT)
+	@mkdir -p $(BUILD_DIRECTORY)
+	$(CC) $(LDFLAGS) $^ -o $@ $(LIBS)
+
+$(OBJECT): $(BUILD_DIRECTORY)/%.o: $(CODE_DIRECTORY)/%.c $(HEADER)
+	@mkdir -p $(BUILD_DIRECTORY)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(EXEC): $(OBJECTS) Makefile
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $(EXEC) $(LIBS)
-
-.PHONY: clean
-
 clean:
-	rm -f *.o $(EXEC)
+	rm -rf $(OBJECT) $(EXECUTABLE)
