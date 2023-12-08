@@ -36,9 +36,9 @@ build: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECT)
 	@mkdir -p $(BUILD_DIRECTORY)
-	$(CC) $(LDFLAGS) $^ -o $@ $(LIBS)
+	$(CC) $(LDFLAGS) $(OBJECT) -o $(EXECUTABLE) $(LIBS)
 
-$(OBJECT): $(BUILD_DIRECTORY)/%.o: $(CODE_DIRECTORY)/%.c $(HEADER)
+$(BUILD_DIRECTORY)/%.o: $(CODE_DIRECTORY)/%.c $(HEADER)
 	@mkdir -p $(BUILD_DIRECTORY)
 	$(CC) $(CFLAGS) -c $< -o $@
 
