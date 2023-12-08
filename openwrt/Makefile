@@ -28,7 +28,7 @@ endef
  
 define Package/openhybrid/install
 	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/code/openhybrid $(1)/usr/sbin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/openhybrid $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/script/openhybrid-event $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/script/openhybrid-route $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/script/openhybrid-lte $(1)/usr/sbin/
