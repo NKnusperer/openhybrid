@@ -1,5 +1,5 @@
 diff --git a/networking/udhcp/d6_dhcpc.c b/networking/udhcp/d6_dhcpc.c
-index cdd06188e..0a08be523 100644
+index cdd0618..0a08be5 100644
 --- a/networking/udhcp/d6_dhcpc.c
 +++ b/networking/udhcp/d6_dhcpc.c
 @@ -334,7 +334,7 @@ static void option_to_env(const uint8_t *option, const uint8_t *option_end)
