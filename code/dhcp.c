@@ -73,7 +73,7 @@ pid_t start_udhcpc() {
         close(udhcpc_pipe[0]);
         dup2(udhcpc_pipe[1], STDOUT_FILENO);
         dup2(udhcpc_pipe[1], STDERR_FILENO);
-        execl("/bin/busybox",
+        execl("/bin/busybox-openhybrid",
             "udhcpc",
             "-i", runtime.tunnel_interface_name,
             "-s", dhcp_script_path,
@@ -104,7 +104,7 @@ pid_t start_udhcpc6() {
         close(udhcpc6_pipe[0]);
         dup2(udhcpc6_pipe[1], STDOUT_FILENO);
         dup2(udhcpc6_pipe[1], STDERR_FILENO);
-        execl("/bin/busybox",
+        execl("/bin/busybox-openhybrid",
             "udhcpc6",
             "-i", runtime.tunnel_interface_name,
             "-s", dhcp_script_path,

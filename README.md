@@ -36,9 +36,9 @@ For uploads you can implement a similar logic, or route your outgoing traffic st
 ### Software
 
 * Linux (kernel 3.7 or newer)
-* busybox (sh, udhcpc and udhcpc6 applets)
+* Patched busybox (sh, udhcpc and udhcpc6 applets)
 * libmnl
-* A reasonable C library (eg. glibc)
+* A reasonable C library (eg. glibc / musl)
 
 And for compilation:
 * GNU make
@@ -47,6 +47,7 @@ And for compilation:
 #### Patch for busybox
 
 busybox (all versions) need to be patched in order for OpenHybrid to work. See `patch/busybox` for details.
+The patched executable is expected to be located at `/bin/busybox-openhybrid`.
 
 ## Usage
 

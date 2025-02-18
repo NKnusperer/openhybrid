@@ -20,10 +20,12 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
-#include <net/ethernet.h>
 #include <netinet/ip.h>
 #include <netinet/ip6.h>
 #include <netinet/udp.h>
+
+#define ETHERTYPE_IP    0x0800
+#define ETHERTYPE_IPV6  0x86dd
 
 void send_gre(uint8_t tuntype, uint16_t proto, uint32_t sequence, bool include_sequence, void *payload, uint16_t payload_size) {
     unsigned char buffer[MAX_PKT_SIZE] = {};

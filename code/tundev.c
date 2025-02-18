@@ -24,7 +24,9 @@
 #include <linux/if_tun.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
-#include <net/ethernet.h>
+
+#define ETHERTYPE_IP    0x0800
+#define ETHERTYPE_IPV6  0x86dd
 
 bool create_gre_tunnel_dev() {
     struct mnl_socket *nl_sock = NULL;
