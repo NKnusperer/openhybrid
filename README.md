@@ -44,9 +44,9 @@ And for compilation:
 * GNU make
 * A reasonable C compiler
 
-#### Patches for Linux and busybox
+#### Patch for busybox
 
-The current versions of Linux (>=4.20) and busybox (all versions) need to be patched in order for OpenHybrid to work. See `patches` for details.
+busybox (all versions) need to be patched in order for OpenHybrid to work. See `patch/busybox` for details.
 
 ## Usage
 
@@ -72,7 +72,7 @@ AT+CGPADDR
 
 The 1st line will create a new profile (bearer), the 2nd line will initiate the connection and the 3rd line will show you the dynamic PDP parameters, which contain the public IPv6 address assigned to you in decimal.
 
-You can also automate this with scripts, see `examples/lte.sh` for example.
+You can also automate this with scripts, see `script/openhybrid-lte` for example.
 
 
 Once the LTE connection is established you will not have access to the internet. Your access will be restricted to:
@@ -83,27 +83,23 @@ Once the LTE connection is established you will not have access to the internet.
 
 Regular routing uses the destination address of a packet to determine which interface to use for sending. If you have multiple interfaces (LTE + DSL) and you whish to send packets to a single server using both interfaces you need to set up source based routing.
 
-See `examples/policy-based-routing.sh` for an example.
+See `script/openhybrid-route` for an example.
 
 ### Step 4: Create OpenHybrid config
 
-Create a config file for OpenHybrid. You can use `examples/openhybrid.conf` as a template, it contains comments to describe what each config option does.
+Create a config file for OpenHybrid. You can use `data/openhybrid.conf` as a template, it contains comments to describe what each config option does.
 
 ### Step 5: Create OpenHybrid event script
 
 OpenHybrid will not assign IP addresses or install routes, that's what the event script is for.
 
-See `examples/openhybrid_event.sh` for an example.
+See `script/openhybrid-event` for an example.
 
 Make sure you've set `event script path` to the absolute or relative path of this script in your OpenHybrid config.
 
 ### Step 6: Compile and start OpenHybrid
 
-Compilation is fairly simple, just type make:
- ```
- cd src
- make
-```
+Compilation is fairly simple, just type `make`.
 
 And then start OpenHybrid as root, providing the path to the configuration file as argument:
 ```
