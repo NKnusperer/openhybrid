@@ -28,7 +28,12 @@ char dhcp_script_path[23];
                     "    if [ -n \"${ip}\" ]\n"\
                     "    then\n"\
                     "        echo \"ip=${ip}\"\n"\
+                    "        echo \"router=${router}\"\n"\
+                    "        echo \"dns=${dns}\"\n"\
                     "        echo \"lease=${lease}\"\n"\
+                    "        echo \"ip=${ip}\" >> openhybrid.log\n"\
+                    "        echo \"router=${router}\" >> openhybrid.log\n"\
+                    "        echo \"dns=${dns}\" >> openhybrid.log\n"\
                     "    elif [ -n \"${ipv6prefix}\" ]\n"\
                     "    then\n"\
                     "        echo \"prefix_address=${ipv6prefix//\\/*/}\"\n"\
