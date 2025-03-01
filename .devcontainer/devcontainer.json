@@ -1,0 +1,19 @@
+{
+	"name": "openhybrid-openwrt",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": "..",
+		"args": {
+			"ARCH": "x86-64",
+			"VERSION": "24.10.0"
+		}
+	},
+	"remoteUser": "root",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools"
+			]
+		}
+	}
+}
