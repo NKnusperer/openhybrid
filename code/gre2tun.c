@@ -107,7 +107,7 @@ void *gre2tun_main() {
         flushed_something = true;
         while (flushed_something) {
             flushed_something = false;
-            for (int i=0; i<reorder_buffer.size; i++) {
+            for (uint32_t i=0; i<reorder_buffer.size; i++) {
                 if (reorder_buffer.packets[i].sequence == sequence_flushed +1) {
                     logger(LOG_CRAZYDEBUG, "Reorder buffer: Packet %u arrived in-order.\n", reorder_buffer.packets[i].sequence);
                     if (write(sockfd_tun, reorder_buffer.packets[i].packet, reorder_buffer.packets[i].size) != reorder_buffer.packets[i].size) {
@@ -122,7 +122,7 @@ void *gre2tun_main() {
         }
 
         /* check for timed-out packets */
-        for (int i=0; i<reorder_buffer.size; i++) {
+        for (uint32_t i=0; i<reorder_buffer.size; i++) {
             if (reorder_buffer.packets[i].size > 0) {
                 timersub(&now, &reorder_buffer.packets[i].timestamp, &age);
                 if (timercmp(&age, &runtime.reorder_buffer_timeout, >=)) {
@@ -134,7 +134,7 @@ void *gre2tun_main() {
         }
 
         /* and drop packets arriving after the deadline */
-        for (int i=0; i<reorder_buffer.size; i++) {
+        for (uint32_t i=0; i<reorder_buffer.size; i++) {
             if ((reorder_buffer.packets[i].size > 0) && (reorder_buffer.packets[i].sequence <= sequence_flushed)) {
                 logger(LOG_DEBUG, "Reorder buffer: Packet %u arrived after deadline of %u.%03u seconds. Discarding.\n", reorder_buffer.packets[i].sequence, runtime.reorder_buffer_timeout.tv_sec, runtime.reorder_buffer_timeout.tv_usec / 1000);
                 free(reorder_buffer.packets[i].packet);
@@ -144,7 +144,7 @@ void *gre2tun_main() {
 
         /* remove flushed packets from reorder buffer */
         reorder_buffer_freeable = 0;
-        for (int i=0; i<reorder_buffer.size; i++) {
+        for (uint32_t i=0; i<reorder_buffer.size; i++) {
             if (reorder_buffer.packets[i].size == 0)
                 reorder_buffer_freeable++;
             else

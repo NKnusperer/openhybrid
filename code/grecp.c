@@ -21,7 +21,7 @@ int read_grecpattribute(void *buffer, int size, struct grecpattr *attr) {
     if (size <= 0) {
         /* why do you tell me to read if there's nothing to read? */
         return 0;
-    } else if (size < sizeof(attr->id) + sizeof(attr->length)) {
+    } else if (size < (int)(sizeof(attr->id) + sizeof(attr->length))) {
         logger(LOG_ERROR, "Malformed packet detected.\n");
         return 0;
     }
