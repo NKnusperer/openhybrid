@@ -28,7 +28,7 @@
 #define ETHERTYPE_IPV6  0x86dd
 
 void send_gre(uint8_t tuntype, uint16_t proto, uint32_t sequence, bool include_sequence, void *payload, uint16_t payload_size) {
-    unsigned char buffer[MAX_PKT_SIZE] = {};
+    unsigned char buffer[MAX_PKT_SIZE] = { 0 };
     int size = 0;
 
     /* GRE header */
@@ -50,20 +50,20 @@ void send_gre(uint8_t tuntype, uint16_t proto, uint32_t sequence, bool include_s
     size += payload_size;
 
     /* Source & Destination */
-    struct sockaddr_in6 src = {};
+    struct sockaddr_in6 src = { 0 };
     src.sin6_family = AF_INET6;
     if (tuntype == GRECP_TUNTYPE_LTE) {
         src.sin6_addr = runtime.lte.interface_ip;
     } else {
         src.sin6_addr = runtime.dsl.interface_ip;
     }
-    struct sockaddr_in6 dst = {};
+    struct sockaddr_in6 dst = { 0 };
     dst.sin6_family = AF_INET6;
     dst.sin6_addr = runtime.haap.ip;
 
     /* Construct control information */
-    struct msghdr msgh = {};
-    struct iovec msgiov = {};
+    struct msghdr msgh = { 0 };
+    struct iovec msgiov = { 0 };
     struct cmsghdr *c;
     struct unp_in_pktinfo {
         struct in6_addr ipi6_addr;
@@ -75,7 +75,7 @@ void send_gre(uint8_t tuntype, uint16_t proto, uint32_t sequence, bool include_s
     msgiov.iov_len = size;
     msgh.msg_iov = &msgiov;
     msgh.msg_iovlen = 1;
-    unsigned char control_buf[CMSG_LEN(sizeof(struct unp_in_pktinfo))] = {};
+    unsigned char control_buf[CMSG_LEN(sizeof(struct unp_in_pktinfo))] = { 0 };
     msgh.msg_control = &control_buf;
     msgh.msg_controllen = CMSG_LEN(sizeof(struct unp_in_pktinfo));
     c = CMSG_FIRSTHDR(&msgh);

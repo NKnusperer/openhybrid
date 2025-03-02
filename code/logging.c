@@ -55,7 +55,7 @@ void logger_hexdump(int8_t log_level, void *buffer, int size, const char* format
         vprintf(format, arglist);
         va_end(arglist);
 
-        unsigned char asciibuffer[17] = {};
+        unsigned char asciibuffer[17] = { 0 };
         unsigned char *charbuffer = (unsigned char*)buffer;
         int i;
         for (i = 0; i < size; i++) {

@@ -53,7 +53,7 @@ bool create_gre_tunnel_dev() {
     mnl_attr_put_str(nlh, IFLA_INFO_KIND, "ip6gre");
 
     struct nlattr *tunnelinfo = mnl_attr_nest_start(nlh, IFLA_INFO_DATA);
-    struct sockaddr_in6 addr = {};
+    struct sockaddr_in6 addr = { 0 };
     addr.sin6_addr = runtime.lte.interface_ip;
     mnl_attr_put(nlh, IFLA_GRE_LOCAL, sizeof(addr.sin6_addr), &addr.sin6_addr);
     mnl_attr_put(nlh, IFLA_GRE_REMOTE, sizeof(runtime.haap.ip), &runtime.haap.ip);

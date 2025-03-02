@@ -123,7 +123,7 @@ void handle_grecpnotify(uint8_t tuntype, void *buffer, int size) {
     }
     logger_hexdump(LOG_CRAZYDEBUG, buffer, size, "Contents of notify message:\n");
 
-    struct grecpattr attr = {};
+    struct grecpattr attr = { 0 };
     int bytes_read = 0;
     while ((bytes_read = read_grecpattribute(buffer += bytes_read, size -= bytes_read, &attr)) > 0) {
         switch (attr.id) {

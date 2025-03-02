@@ -38,7 +38,7 @@ void *gre2tun_main() {
         struct reorder_buffer_element *packets;
         struct reorder_buffer_element *packets_old;
         uint32_t size;
-    } reorder_buffer = {};
+    } reorder_buffer = { 0 };
 
     unsigned char buffer[MAX_PKT_SIZE];
     ssize_t size;
@@ -47,7 +47,7 @@ void *gre2tun_main() {
 
     uint8_t payload_offset;
     struct grehdr *greh;
-    struct sockaddr_in6 saddr = {};
+    struct sockaddr_in6 saddr = { 0 };
     socklen_t saddr_size = sizeof(saddr);
 
     bool flushed_something;

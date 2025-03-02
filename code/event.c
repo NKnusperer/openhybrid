@@ -34,8 +34,8 @@ void trigger_event(char *name) {
             exit(1);
         } else if (pid == 0) {
             char *env[MAX_ENV_VARS];
-            char straddr[INET_ADDRSTRLEN] = {};
-            char straddr6[INET6_ADDRSTRLEN] = {};
+            char straddr[INET_ADDRSTRLEN] = { 0 };
+            char straddr6[INET6_ADDRSTRLEN] = { 0 };
             int i;
 
             for (i=0; i < MAX_ENV_VARS; i++) {

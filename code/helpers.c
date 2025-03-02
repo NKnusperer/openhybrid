@@ -27,14 +27,14 @@ bool isvalueinarray(uint8_t val, uint8_t *arr, uint8_t size) {
 }
 
 inline struct timeval get_uptime() {
-    struct timespec t = {};
+    struct timespec t = { 0 };
     clock_gettime(CLOCK_MONOTONIC, &t);
     struct timeval ret = { .tv_sec = t.tv_sec, .tv_usec = t.tv_nsec / 1000 };
     return ret;
 }
 
 struct in6_addr get_primary_ip6(char *interface) {
-    struct in6_addr ip = {};
+    struct in6_addr ip = { 0 };
 
     /* getifaddrs(3) corrups my memory :-/ */
 
@@ -44,8 +44,8 @@ struct in6_addr get_primary_ip6(char *interface) {
         return ip;
     }
 
-    struct in6_addr this_ip = {};
-    char this_ifname[IF_NAMESIZE] = {};
+    struct in6_addr this_ip = { 0 };
+    char this_ifname[IF_NAMESIZE] = { 0 };
     int this_scope = 0;
     int this_prefix = 0;
     bool found = false;

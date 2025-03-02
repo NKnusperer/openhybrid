@@ -124,7 +124,7 @@ pid_t start_udhcpc6() {
 }
 
 void process_udhcpc_output() {
-    char buffer[MAX_UDHCPC_OUTPUT] = {};
+    char buffer[MAX_UDHCPC_OUTPUT] = { 0 };
     if (read(udhcpc_pipe[0], buffer, MAX_UDHCPC_OUTPUT-1))  {
         char *line = strtok(buffer, "\n");
         while (line != NULL) {
@@ -140,7 +140,7 @@ void process_udhcpc_output() {
 
         if (runtime.dhcp.lease_time) {
             runtime.dhcp.lease_obtained = get_uptime().tv_sec;
-            char straddr[INET_ADDRSTRLEN] = {};
+            char straddr[INET_ADDRSTRLEN] = { 0 };
             inet_ntop(AF_INET, &runtime.dhcp.ip, straddr, INET_ADDRSTRLEN);
             logger(LOG_INFO, "Obtained %s via udhcpc, valid for %u seconds.\n", straddr, runtime.dhcp.lease_time);
             trigger_event("dhcpup_ip");
@@ -154,7 +154,7 @@ void process_udhcpc_output() {
 }
 
 void process_udhcpc6_output() {
-    char buffer[MAX_UDHCPC_OUTPUT] = {};
+    char buffer[MAX_UDHCPC_OUTPUT] = { 0 };
     if (read(udhcpc6_pipe[0], buffer, MAX_UDHCPC_OUTPUT-1))  {
         char *line = strtok(buffer, "\n");
         while (line != NULL) {
@@ -172,7 +172,7 @@ void process_udhcpc6_output() {
 
         if (runtime.dhcp6.lease_time) {
             runtime.dhcp6.lease_obtained = get_uptime().tv_sec;
-            char straddr[INET6_ADDRSTRLEN] = {};
+            char straddr[INET6_ADDRSTRLEN] = { 0 };
             inet_ntop(AF_INET6, &runtime.dhcp6.prefix_address, straddr, INET6_ADDRSTRLEN);
             logger(LOG_INFO, "Obtained %s/%u via udhcpc6, valid for %u seconds.\n", straddr, runtime.dhcp6.prefix_length, runtime.dhcp6.lease_time);
             trigger_event("dhcpup_ip6");

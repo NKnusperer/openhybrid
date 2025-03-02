@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-CFLAGS ?= -Wall -Werror -std=gnu11 -fcommon -Os -fomit-frame-pointer
+CFLAGS ?= -Wall -Werror -Wextra -Wpedantic -std=gnu11 -fcommon -Os -fomit-frame-pointer
 LDFLAGS ?= -Wl,-Os -Wl,--as-needed -Wl,--sort-common -Wl,--hash-style=gnu
 
 CODE_DIRECTORY = code

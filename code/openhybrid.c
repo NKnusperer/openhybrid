@@ -210,7 +210,7 @@ void execute_timers() {
 
     /* DHCP: check if leases are still valid */
     if ((runtime.dhcp.lease_time) && (runtime.dhcp.lease_obtained + runtime.dhcp.lease_time <= get_uptime().tv_sec)) {
-        char straddr[INET_ADDRSTRLEN] = {};
+        char straddr[INET_ADDRSTRLEN] = { 0 };
         inet_ntop(AF_INET, &runtime.dhcp.ip, straddr, INET_ADDRSTRLEN);
         logger(LOG_INFO, "Lease for %s obtained via udhcpc expired.\n", straddr);
         trigger_event("dhcpdown_ip");
@@ -219,7 +219,7 @@ void execute_timers() {
         runtime.dhcp.lease_obtained = 0;
     }
     if ((runtime.dhcp6.lease_time) && (runtime.dhcp6.lease_obtained + runtime.dhcp6.lease_time <= get_uptime().tv_sec)) {
-        char straddr[INET6_ADDRSTRLEN] = {};
+        char straddr[INET6_ADDRSTRLEN] = { 0 };
         inet_ntop(AF_INET6, &runtime.dhcp6.prefix_address, straddr, INET6_ADDRSTRLEN);
         logger(LOG_INFO, "Lease for %s/%u obtained via udhcpc6 expired.\n", straddr, runtime.dhcp6.prefix_length);
         trigger_event("dhcpdown_ip6");
