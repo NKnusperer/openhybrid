@@ -26,6 +26,7 @@ void read_config(char *path) {
     FILE *fp = fopen(path, "r");
     if (!fp) {
         logger(LOG_FATAL, "Reading config file failed: %s\n", strerror(errno));
+        return;
     }
 
     int read;
