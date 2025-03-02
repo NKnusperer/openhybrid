@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "openwrt",
+            "name": "OpenWrt (Dev Container)",
             "includePath": [
                 "${workspaceFolder}/code",
                 "/builder/toolchain/include",
@@ -9,6 +9,17 @@
             ],
             "defines": [],
             "compilerPath": "/builder/toolchain/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/code"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
             "cStandard": "gnu11",
             "cppStandard": "c++17",
             "intelliSenseMode": "linux-gcc-x64"

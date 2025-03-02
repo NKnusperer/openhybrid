@@ -15,6 +15,21 @@
             "problemMatcher": [
                 "$gcc"
             ]
+        },
+        {
+            "label": "Build Release",
+            "type": "shell",
+            "command": "make clean && make build",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ]
 }

@@ -16,7 +16,7 @@
  */
 #include "openhybrid.h"
 
-void handle_grecpaccept(uint8_t tuntype, void *buffer, int size) {
+void handle_grecpaccept(uint8_t tuntype, uint8_t *buffer, int size) {
     if (tuntype == GRECP_TUNTYPE_LTE) {
         logger(LOG_DEBUG, "Received accept message for LTE tunnel.\n");
     }  else {

@@ -302,7 +302,7 @@ int main(int argc, char **argv, char **envp) {
     logger(LOG_INFO, "OpenHybrid started.\n");
     trigger_event("startup");
 
-    unsigned char buffer[MAX_PKT_SIZE];
+    uint8_t buffer[MAX_PKT_SIZE];
     int size;
     struct sockaddr_in6 saddr;
     socklen_t saddr_size = sizeof(saddr);

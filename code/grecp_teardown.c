@@ -16,7 +16,7 @@
  */
 #include "openhybrid.h"
 
-void handle_grecpteardown(void *buffer, int size) {
+void handle_grecpteardown(uint8_t *buffer, int size) {
     logger(LOG_DEBUG, "Received tear down message.\n");
     logger_hexdump(LOG_CRAZYDEBUG, buffer, size, "Contents of tear down message:\n");
 

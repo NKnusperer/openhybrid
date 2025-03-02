@@ -17,7 +17,7 @@
 #include "openhybrid.h"
 
  /* read one grecp attribute from buffer, save it in attr and return number of bytes read */
-int read_grecpattribute(void *buffer, int size, struct grecpattr *attr) {
+int read_grecpattribute(uint8_t *buffer, int size, struct grecpattr *attr) {
     if (size <= 0) {
         /* why do you tell me to read if there's nothing to read? */
         return 0;
@@ -40,7 +40,7 @@ int read_grecpattribute(void *buffer, int size, struct grecpattr *attr) {
 }
 
 /* write one grecp attribute to buffer and return number of bytes written */
-int append_grecpattribute(void *buffer, uint8_t id, uint16_t length, void *value) {
+int append_grecpattribute(uint8_t *buffer, uint8_t id, uint16_t length, void *value) {
     memcpy(buffer, &id, sizeof(id));
     uint16_t nlength = htons(length);
     memcpy(buffer + 1, &nlength, 2);
@@ -49,7 +49,7 @@ int append_grecpattribute(void *buffer, uint8_t id, uint16_t length, void *value
 }
 
 /* validate gre message (type=grecp, key=correct, ...) and call message handlers */
-void process_grecpmessage(void *buffer, int size) {
+void process_grecpmessage(uint8_t *buffer, int size) {
     struct grehdr *greh = (struct grehdr *)buffer;
     /* gre->proto is already checked by BPF, no need to check again */
     if (ntohs(greh->flags_and_version) != GRECP_FLAGSANDVERSION) {
@@ -92,7 +92,7 @@ void process_grecpmessage(void *buffer, int size) {
     }
 }
 
-bool send_grecpmessage(uint8_t msgtype, uint8_t tuntype, void *attributes, int attributes_size) {
+bool send_grecpmessage(uint8_t msgtype, uint8_t tuntype, uint8_t *attributes, int attributes_size) {
     unsigned char buffer[MAX_PKT_SIZE] = { 0 };
     int size = 0;
 

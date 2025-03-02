@@ -115,7 +115,7 @@ bool send_grecpnotify_bypasstraffic(uint32_t kbit) {
     return res;
 }
 
-void handle_grecpnotify(uint8_t tuntype, void *buffer, int size) {
+void handle_grecpnotify(uint8_t tuntype, uint8_t *buffer, int size) {
     if (tuntype == GRECP_TUNTYPE_LTE) {
         logger(LOG_DEBUG, "Received notify message for LTE tunnel.\n");
     }  else {

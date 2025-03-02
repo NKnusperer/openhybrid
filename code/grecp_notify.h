@@ -18,4 +18,4 @@ bool send_grecpnotify_filterlistpackageack(uint8_t ackcode);
 bool send_grecpnotify_tunnelverify();
 bool send_grecpnotify_linkfailure(uint8_t tuntype);
 bool send_grecpnotify_bypasstraffic(uint32_t kbit);
-void handle_grecpnotify(uint8_t tuntype, void *attributes, int size);
+void handle_grecpnotify(uint8_t tuntype, uint8_t *buffer, int size);

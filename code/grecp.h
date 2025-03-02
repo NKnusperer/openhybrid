@@ -84,10 +84,10 @@ struct grecphdr {
 struct grecpattr {
     uint8_t id;
     uint16_t length;
-    void *value;
+    uint8_t *value;
 };
 
-int read_grecpattribute(void *buffer, int size, struct grecpattr *attr);
-int append_grecpattribute(void *buffer, uint8_t id, uint16_t length, void *value);
-void process_grecpmessage(void *buffer, int size);
-bool send_grecpmessage(uint8_t msgtype, uint8_t tuntype, void *attributes, int attributes_size);
+int read_grecpattribute(uint8_t *buffer, int size, struct grecpattr *attr);
+int append_grecpattribute(uint8_t *buffer, uint8_t id, uint16_t length, void *value);
+void process_grecpmessage(uint8_t *buffer, int size);
+bool send_grecpmessage(uint8_t msgtype, uint8_t tuntype, uint8_t *attributes, int attributes_size);

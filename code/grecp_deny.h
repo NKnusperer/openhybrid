@@ -14,4 +14,4 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-void handle_grecpdeny(uint8_t tuntype, void *buffer, int size);
+void handle_grecpdeny(uint8_t tuntype, uint8_t *buffer, int size);

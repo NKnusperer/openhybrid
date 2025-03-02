@@ -55,7 +55,7 @@ bool send_grecphello(uint8_t tuntype) {
     return res;
 }
 
-void handle_grecphello(uint8_t tuntype, void *buffer, int size) {
+void handle_grecphello(uint8_t tuntype, uint8_t *buffer, int size) {
     if (tuntype == GRECP_TUNTYPE_LTE) {
         logger(LOG_DEBUG, "Received hello message for LTE tunnel.\n");
     }  else {

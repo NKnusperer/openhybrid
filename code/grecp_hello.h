@@ -15,4 +15,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 bool send_grecphello(uint8_t tuntype);
-void handle_grecphello(uint8_t tuntype, void *buffer, int size);
+void handle_grecphello(uint8_t tuntype, uint8_t *buffer, int size);
