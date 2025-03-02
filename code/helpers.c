@@ -46,8 +46,8 @@ struct in6_addr get_primary_ip6(char *interface) {
 
     struct in6_addr this_ip = { 0 };
     char this_ifname[IF_NAMESIZE] = { 0 };
-    int this_scope = 0;
-    int this_prefix = 0;
+    unsigned int this_scope = 0;
+    unsigned int this_prefix = 0;
     bool found = false;
     while (19 == fscanf(fd,
                         " %2hhx%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx %*x %x %x %*x %s",
